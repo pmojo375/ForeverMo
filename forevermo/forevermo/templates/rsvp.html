@@ -1,0 +1,79 @@
+{% load static %}
+<h1>RSVP</h1><hr class="rounded">
+<br>
+<form method="POST">
+  {% csrf_token %}
+  <div class="mb-3">
+    <h4>Your Information</h4>
+    <div class="row">
+      <div class="col-auto">
+        <div class="fieldWrapper">
+          {{ form.firstname.errors }}
+          <label for="{{ form.firstname.id_for_label }}" class="col-form-label">First Name</label>
+          {{ form.firstname }}
+        </div>
+      </div>
+      <div class="col-auto">
+        <div class="fieldWrapper">
+          {{ form.lastname.errors }}
+          <label for="{{ form.lastname.id_for_label }}" class="col-form-label">Last Name</label>
+          {{ form.lastname }}
+        </div>
+      </div>
+      <div class="foodOption">
+        <div class="fieldWrapper">
+          {{ form.foodselection.errors }}
+          <label for="{{ form.foodselection.id_for_label }}" class="col-form-label">Food Selection</label>
+          {{ form.foodselection }}
+        </div>
+      </div>
+      <div class="corn">
+        <div class="fieldWrapper">
+          {{ form.corn.errors }}
+          <label for="{{ form.corn.id_for_label }}" class="col-form-label">Corn on the Cob?</label>
+          {{ form.corn }}
+        </div>
+      </div>
+      <div class="fieldWrapper">
+        {{ form.plusone.errors }}
+        <label for="{{ form.plusone.id_for_label }}" class="col-form-label">Plus One?</label>
+        {{ form.plusone }}
+      </div>
+    </div>
+  </div>
+  <div id="plusOnePane" class="row">
+    <h4>Plus One</h4>
+    <div class="row">
+      <div class="col-auto">
+        <div class="fieldWrapper">
+          {{ form.firstnameplusone.errors }}
+          <label for="{{ form.firstnameplusone.id_for_label }}" class="col-form-label">First Name</label>
+          {{ form.firstnameplusone }}
+        </div>
+      </div>
+      <div class="col-auto">
+        <div class="fieldWrapper">
+          {{ form.lastnameplusone.errors }}
+          <label for="{{ form.lastnameplusone.id_for_label }}" class="col-form-label">Last Name</label>
+          {{ form.lastnameplusone }}
+        </div>
+      </div>
+      <div class="corn">
+        <div class="fieldWrapper">
+          {{ form.cornpluseone.errors }}
+          <label for="{{ form.cornplusone.id_for_label }}" class="col-form-label">Corn on the Cob?</label>
+          {{ form.cornplusone }}
+        </div>
+      </div>
+      <div class="foodOption">
+        <div class="fieldWrapper">
+          {{ form.foodselectionplusone.errors }}
+          <label for="{{ form.foodselectionplusone.id_for_label }}" class="col-form-label">Food Selection</label>
+          {{ form.foodselectionplusone }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

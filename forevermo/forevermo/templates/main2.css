@@ -1,0 +1,11 @@
+#plusOnePane {
+        display : none
+}
+
+div.container {
+	background-color: #dc7f64;
+}
+
+body {
+  position: relative;
+}

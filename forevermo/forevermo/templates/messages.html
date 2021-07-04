@@ -1,0 +1,54 @@
+{% load static %}
+<h1>Guest Messages</h1><hr class="rounded">
+<div class="messages-container">
+	<div class="slideshow-container mx-auto">
+		<!-- Full-width slides/quotes -->
+		{% for message in messages reversed %}
+			<div class="messages">
+				<q>{{ message.message }}</q>
+				<p class="author">- {{ message.name }}</p>
+			</div>
+		{% endfor %}
+		<!-- Next/prev buttons -->
+		<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+		<a class="next" onclick="plusSlides(1)">&#10095;</a>
+	</div>
+	<button class="btn btn-secondary btn-lg btn-block my-3" type="button" data-toggle="collapse" data-target="#message-form" aria-expanded="false" aria-controls="#message-form">
+	Post a Message to the Future Mr. & Mrs.
+	</button>
+	<div class="collapse" id="message-form">
+		<div class="card card-body">
+			<form method="POST">
+				{% csrf_token %}
+				<div class="form-group">
+					{{ messageForm.name.errors }}
+					{{ messageForm.name }}
+				</div>
+				<div class="form-group my-2">
+					{{ messageForm.message.errors }}
+					{{ messageForm.message }}
+				</div>
+				<button type="submit" class="btn btn-primary">Post</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<h3>Request a Song:</h3>
+
+<form method="POST">
+	{% csrf_token %}
+	<div class="form-group">
+		{{ songForm.name.errors }}
+		{{ songForm.name }}
+	</div>
+	<div class="form-group my-2">
+		{{ songForm.artist.errors }}
+		{{ songForm.artist }}
+	</div>
+        <div class="form-group my-2">
+                {{ songForm.title.errors }}
+                {{ songForm.title }}
+        </div>
+	<button type="submit" class="btn btn-primary">Request</button>
+</form>
