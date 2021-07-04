@@ -24,6 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '%$9h242o@68x)-j(quglwg-g3v&^f-kpn+i2#-9nebm$(r$7_n'
 
+RECAPTCHA_PRIVATE_KEY = '6LdGZ3UbAAAAADC_MHJdtoURHnekXQc_QWugKKJV'
+RECAPTCHA_PUBLIC_KEY = '6LdGZ3UbAAAAABTKZX7CrayqpkiLwfw0gHWcrmMq'
+RECAPTCHA_DEFAULT_ACTION = 'generic'
+RECAPTCHA_SCORE_THRESHOLD = 0.5
+RECAPTCHA_LANGUAGE = 'en' # for auto detection language, remove this from your settings
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -39,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'import_export',
+    'snowpenguin.django.recaptcha3',
 ]
 
 MIDDLEWARE = [

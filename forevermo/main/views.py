@@ -3,12 +3,13 @@ from django.http import HttpResponseRedirect
 from main.forms import *
 from django.core.exceptions import ObjectDoesNotExist
 from main.models import *
+from django.conf import settings
 
 # Create your views here.
 
 def main(request):
 	# if this is a POST request we need to process the form data
-
+	print('Hello')
 	messages = Message.objects.all()
 
 	if request.method == 'POST':
@@ -89,34 +90,55 @@ def main(request):
 						guest.save()
 
 				print('Worked')
+
+				messageForm = MessageForm()
+				songForm = SongForm()
+
 				# process the data in form.cleaned_data as required
 				return HttpResponseRedirect(request.path_info)
 
 			form = GuestForm()
-
+			messageForm = MessageForm()
+			songForm = SongForm()
 		elif 'message' in request.POST:
-			form = MessageForm(request.POST)
-			if form.is_valid():
-				name = form.cleaned_data['name']
-				message = form.cleaned_data['message']
+			messageForm = MessageForm(request.POST)
+			if messageForm.is_valid():
+				captcha_score = messageForm.cleaned_data['captcha']
+
+				name = messageForm.cleaned_data['name']
+				message = messageForm.cleaned_data['message']
 
 				newMessage = Message(name=name, message=message)
 				newMessage.save()
 
+				form = GuestForm()
+				songForm = SongForm()
+
 				# process the data in form.cleaned_data as required
 				return HttpResponseRedirect(request.path_info)
+
+			form = GuestForm()
+			messageForm = MessageForm()
+			songForm = SongForm()
 		elif 'title' in request.POST:
-			form = SongForm(request.POST)
-			if form.is_valid():
-				name = form.cleaned_data['name']
-				artist = form.cleaned_data['artist']
-				title = form.cleaned_data['title']
+			songForm = SongForm(request.POST)
+			if songForm.is_valid():
+				name = songForm.cleaned_data['name']
+				artist = songForm.cleaned_data['artist']
+				title = songForm.cleaned_data['title']
 
 				newSong = Song(name=name, artist=artist, title=title)
 				newSong.save()
 
+				form = GuestForm()
+				messageForm = MessageForm()
+
 				# process the data in form.cleaned_data as required
 				return HttpResponseRedirect(request.path_info)
+
+			form = GuestForm()
+			messageForm = MessageForm()
+			songForm = SongForm()
 
 	# if a GET (or any other method) we'll create a blank form
 	else:
@@ -124,5 +146,4 @@ def main(request):
 		messageForm = MessageForm()
 		songForm = SongForm()
 
-	print('NoWorked')
 	return render(request, 'main.html', {'form': form, 'messageForm':messageForm, 'messages': messages, 'songForm': songForm})

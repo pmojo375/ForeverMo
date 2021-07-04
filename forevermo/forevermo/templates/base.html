@@ -1,4 +1,5 @@
 {% load static %}
+{% load recaptcha3 %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,8 +12,10 @@
     <link href='https://fonts.googleapis.com/css?family=Satisfy|Sacramento|Questrial|Cookie' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}?random=3">
     <title>Forever Mo(jsiejenko)</title>
+    {% recaptcha_init %}
+    {% recaptcha_ready action_name='main' %}
   </head>
-  <img src="{% static '/us_msu_cropped2.png' %}" class="img-fluid">
+  <img src="{% static '/us_msu_cropped.png' %}" class="img-fluid">
     <nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: #116466;" id="mainNav">
       <div class="container-fluid">
         <a class="navbar-brand js-scroll-trigger" href="#home">Home</a>
