@@ -1,4 +1,5 @@
 {% load static %}
+
 <h1>Guest Messages</h1><hr class="rounded">
 <div class="messages-container">
 	<div class="slideshow-container mx-auto">
@@ -28,6 +29,7 @@
 					{{ messageForm.message.errors }}
 					{{ messageForm.message }}
 				</div>
+				{{ messageForm.captcha }}
 				<button type="submit" class="btn btn-primary">Post</button>
 			</form>
 		</div>
