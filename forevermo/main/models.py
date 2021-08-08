@@ -3,15 +3,11 @@ from django.db import models
 class Guest(models.Model):
     firstname = models.CharField(max_length=40)
     lastname = models.CharField(max_length=40)
-    foodchoice = models.IntegerField()
-    corn = models.BooleanField(default=True)
     created_on = models.DateTimeField(auto_now_add=True, null=True)
 
 class PlusOne(models.Model):
     firstname = models.CharField(max_length=40)
     lastname = models.CharField(max_length=40)
-    foodchoice = models.IntegerField()
-    corn = models.BooleanField(default=True)
     host = models.OneToOneField(Guest, on_delete=models.CASCADE, primary_key=True)
     created_on = models.DateTimeField(auto_now_add=True, null=True)
 

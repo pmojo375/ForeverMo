@@ -9,7 +9,6 @@ from django.conf import settings
 
 def main(request):
 	# if this is a POST request we need to process the form data
-	print('Hello')
 	messages = Message.objects.all()
 
 	if request.method == 'POST':
@@ -17,17 +16,19 @@ def main(request):
 		print(request.POST)
 		if 'firstname' in request.POST:
 			form = GuestForm(request.POST)
+			print(f'{form.is_valid()} Form: {form.cleaned_data}')
+
 			if form.is_valid():
+
+				print('Form was valid')
 
 				plusone = form.cleaned_data['plusone']
 				firstname = form.cleaned_data['firstname']
 				lastname = form.cleaned_data['lastname']
-				food = form.cleaned_data['foodselection']
 
 				if plusone:
 					p1firstname = form.cleaned_data['firstnameplusone']
 					p1lastname = form.cleaned_data['lastnameplusone']
-					p1food = form.cleaned_data['foodselectionplusone']
 
 				try:
 
@@ -48,7 +49,7 @@ def main(request):
 
 						guest.save()
 
-						p1 = PlusOne(firstname=p1firstname, lastname=p1lastname, foodchoice=p1food, host=guest)
+						p1 = PlusOne(firstname=p1firstname, lastname=p1lastname, host=guest)
 
 						p1.save()
 
@@ -77,16 +78,16 @@ def main(request):
 					if plusone:
 
 						# create guest object and save
-						guest = Guest(firstname=firstname, lastname=lastname, foodchoice=food)
+						guest = Guest(firstname=firstname, lastname=lastname)
 						guest.save()
 
 						# create plus one object and save
 						# no plus one could previously be tied to this guest since it is a new object
-						p1 = PlusOne(firstname=p1firstname, lastname=p1lastname, foodchoice=p1food, host=guest)
+						p1 = PlusOne(firstname=p1firstname, lastname=p1lastname, host=guest)
 						p1.save()
 					else:
 						# create guest object and save
-						guest = Guest(firstname=firstname, lastname=lastname, foodchoice=food)
+						guest = Guest(firstname=firstname, lastname=lastname)
 						guest.save()
 
 				print('Worked')

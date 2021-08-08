@@ -1,6 +1,9 @@
 {% load static %}
 <h1>RSVP</h1><hr class="rounded">
 <br>
+
+<p class="lead">Sirloin and pork tenderloin will be offered with guests having the option to try both if desired. A vegetarian option will also be available upon request.</p>
+<br>
 <form method="POST">
   {% csrf_token %}
   <div class="mb-3">
@@ -20,6 +23,7 @@
           {{ form.lastname }}
         </div>
       </div>
+      <!--
       <div class="foodOption">
         <div class="fieldWrapper">
           {{ form.foodselection.errors }}
@@ -34,6 +38,7 @@
           {{ form.corn }}
         </div>
       </div>
+      -->
       <div class="fieldWrapper">
         {{ form.plusone.errors }}
         <label for="{{ form.plusone.id_for_label }}" class="col-form-label">Plus One?</label>
@@ -58,6 +63,7 @@
           {{ form.lastnameplusone }}
         </div>
       </div>
+      <!--
       <div class="corn">
         <div class="fieldWrapper">
           {{ form.cornpluseone.errors }}
@@ -72,8 +78,10 @@
           {{ form.foodselectionplusone }}
         </div>
       </div>
+      -->
     </div>
   </div>
   <br>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
