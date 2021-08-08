@@ -1,10 +1,25 @@
 {% load static %}
+
+<script>
+  grecaptcha.ready(function() {
+      $('#guestForm').submit(function(e){
+          var form = this;
+          e.preventDefault()
+          grecaptcha.execute('6LdGZ3UbAAAAABTKZX7CrayqpkiLwfw0gHWcrmMq', {action: 'guestForm'}).then(function(token) {
+              $('#rsvp_recaptcha').val(token)
+              form.submit()
+          });
+      })
+  });
+ </script>
+
+
 <h1>RSVP</h1><hr class="rounded">
 <br>
 
 <p class="lead">Sirloin and pork tenderloin will be offered with guests having the option to try both if desired. A vegetarian option will also be available upon request.</p>
 <br>
-<form method="POST">
+<form id=guestForm method="POST">
   {% csrf_token %}
   <div class="mb-3">
     <h4>Your Information</h4>
@@ -23,22 +38,6 @@
           {{ form.lastname }}
         </div>
       </div>
-      <!--
-      <div class="foodOption">
-        <div class="fieldWrapper">
-          {{ form.foodselection.errors }}
-          <label for="{{ form.foodselection.id_for_label }}" class="col-form-label">Food Selection</label>
-          {{ form.foodselection }}
-        </div>
-      </div>
-      <div class="corn">
-        <div class="fieldWrapper">
-          {{ form.corn.errors }}
-          <label for="{{ form.corn.id_for_label }}" class="col-form-label">Corn on the Cob?</label>
-          {{ form.corn }}
-        </div>
-      </div>
-      -->
       <div class="fieldWrapper">
         {{ form.plusone.errors }}
         <label for="{{ form.plusone.id_for_label }}" class="col-form-label">Plus One?</label>
@@ -63,25 +62,10 @@
           {{ form.lastnameplusone }}
         </div>
       </div>
-      <!--
-      <div class="corn">
-        <div class="fieldWrapper">
-          {{ form.cornpluseone.errors }}
-          <label for="{{ form.cornplusone.id_for_label }}" class="col-form-label">Corn on the Cob?</label>
-          {{ form.cornplusone }}
-        </div>
-      </div>
-      <div class="foodOption">
-        <div class="fieldWrapper">
-          {{ form.foodselectionplusone.errors }}
-          <label for="{{ form.foodselectionplusone.id_for_label }}" class="col-form-label">Food Selection</label>
-          {{ form.foodselectionplusone }}
-        </div>
-      </div>
-      -->
     </div>
   </div>
   <br>
+  <input type="hidden" name="g-recaptcha-response" id='rsvp_recaptcha'>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

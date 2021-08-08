@@ -2,7 +2,6 @@ from django import forms
 from django.db.models import Q
 from main.models import *
 from django.forms import ModelForm
-from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 from django.conf import settings
 
 class GuestForm(forms.Form):
@@ -15,9 +14,8 @@ class GuestForm(forms.Form):
 class MessageForm(forms.Form):
      name = forms.CharField(label='Name', strip=True, widget=forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : "Enter Name"}))
      message = forms.CharField(label='Message', strip=True, widget=forms.Textarea(attrs={'class' : 'form-control', 'placeholder' : "Type Your Message", 'rows' : "4"}))
-     captcha = ReCaptchaField(score_threshold=0.9)
 
 class SongForm(forms.Form):
      name = forms.CharField(label='Name', strip=True, widget=forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : "Enter Name"}))
      title = forms.CharField(label='Title', strip=True, widget=forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : "Title"}))
-     artist = forms.CharField(label='Artist', strip=True, widget=forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : "Artist"})) 
+     artist = forms.CharField(label='Artist', strip=True, widget=forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : "Artist"}))

@@ -1,4 +1,16 @@
 {% load static %}
+<script>
+  grecaptcha.ready(function() {
+      $('#messageForm').submit(function(e){
+          var form = this;
+          e.preventDefault()
+          grecaptcha.execute('6LdGZ3UbAAAAABTKZX7CrayqpkiLwfw0gHWcrmMq', {action: 'messageForm'}).then(function(token) {
+              $('#message_recaptcha').val(token)
+              form.submit()
+          });
+      })
+  });
+ </script>
 
 <h1>Guest Messages</h1><hr class="rounded">
 <div class="messages-container">
@@ -19,7 +31,7 @@
 	</button>
 	<div class="collapse" id="message-form">
 		<div class="card card-body">
-			<form method="POST">
+			<form id=messageForm method="POST">
 				{% csrf_token %}
 				<div class="form-group">
 					{{ messageForm.name.errors }}
@@ -29,16 +41,29 @@
 					{{ messageForm.message.errors }}
 					{{ messageForm.message }}
 				</div>
-				{{ messageForm.captcha }}
+				<input type="hidden" name="g-recaptcha-response" id='message_recaptcha'>
 				<button type="submit" class="btn btn-primary">Post</button>
 			</form>
 		</div>
 	</div>
 </div>
 
+<script>
+  grecaptcha.ready(function() {
+      $('#songForm').submit(function(e){
+          var form = this;
+          e.preventDefault()
+          grecaptcha.execute('6LdGZ3UbAAAAABTKZX7CrayqpkiLwfw0gHWcrmMq', {action: 'songForm'}).then(function(token) {
+              $('#song_recaptcha').val(token)
+              form.submit()
+          });
+      })
+  });
+ </script>
+
 <h3>Request a Song:</h3>
 
-<form method="POST">
+<form id=songForm method="POST">
 	{% csrf_token %}
 	<div class="form-group">
 		{{ songForm.name.errors }}
@@ -52,5 +77,6 @@
                 {{ songForm.title.errors }}
                 {{ songForm.title }}
         </div>
+	<input type="hidden" name="g-recaptcha-response" id='song_recaptcha'>
 	<button type="submit" class="btn btn-primary">Request</button>
 </form>
